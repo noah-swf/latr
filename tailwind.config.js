@@ -13,6 +13,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Montserrat', 'Figtree', ...defaultTheme.fontFamily.sans],
+                lora: ['Lora', 'cursive'],
             },
             colors: {
                 primary: '#588157',
