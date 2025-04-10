@@ -16,7 +16,11 @@ export default {
                 lora: ['Lora', 'cursive'],
             },
             colors: {
-                primary: '#588157',
+                primary: {
+                    DEFAULT : '#588157',
+                    600: '#7EAA7D',
+                },
+
                 accent: '#A3B18A',
                 neutral: '#DAD7CD',
                 'base-100': '#FFFFFF',
