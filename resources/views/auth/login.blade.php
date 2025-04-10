@@ -5,6 +5,14 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        <h1 class="text-xl block font-medium">Login</h1>
+
+        <div class="mt-1 mb-4">
+            <a href="{{ route('register')}}" class="text-xs text-gray-600 ">Du hast noch keinen Account?
+                <span class="underline text-black">Registriere dich. </span>
+            </a>
+        </div>
+
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -27,7 +35,7 @@
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-primary-600 shadow-sm focus:ring-primary-600" name="remember">
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
