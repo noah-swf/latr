@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WatchLaterController;
+
+use App\Models\WatchLaterVideo;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -9,8 +13,13 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/home', function () {
-    return view('home');
+    $videos = WatchLaterVideo::with('user')->latest()->simplePaginate(10);
+    return view('home', compact('videos'));
 })->middleware(['auth', 'verified'])->name('home');
+
+Route::post('/watch-later/store', [WatchLaterController::class, 'store'])->middleware(['auth', 'verified']);
+
+
 
 Route::get('/watched', function () {
     return view('watched');
