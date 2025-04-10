@@ -1,17 +1,15 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Home') }}
-        </h2>
-    </x-slot>
+    <div class="w-1/2 max-md:w-4/5 mx-auto text-center">
+        <h1 class="font-lora italic font-medium text-5xl opacity-85 py-24">Save it now. Watch it latr.</h1>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+        <x-main-text-input/>
+        
+        <div>
+            @foreach ($videos as $video)
+                <x-watch-later-card :video="$video"/>
+            @endforeach
         </div>
+        
+
     </div>
 </x-app-layout>
