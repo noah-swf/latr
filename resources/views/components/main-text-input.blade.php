@@ -24,47 +24,4 @@
 </div>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const saveButton = document.getElementById('save-button');
-        const videoUrlInput = document.getElementById('video-url');
 
-        saveButton.addEventListener('click', function() {
-            const url = videoUrlInput.value.trim();
-
-            if (!url) {
-                return;
-            }
-
-            // Button-Status auf "Lädt..." setzen
-            saveButton.disabled = true;
-            saveButton.querySelector('span').textContent = 'Speichern...';
-
-            // Formular-Daten erstellen
-            const formData = new FormData();
-            formData.append('url', url);
-            formData.append('_token', document.querySelector('input[name="_token"]').value);
-
-            // AJAX-Request senden
-            fetch('/watch-later/store', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    videoUrlInput.value = ''; // Input-Feld leeren
-                }
-            })
-            .catch(error => {
-                showMessage('Ein Fehler ist aufgetreten: ' + error.message, 'error');
-            })
-            .finally(() => {
-                // Button-Status zurücksetzen
-                saveButton.disabled = false;
-                saveButton.querySelector('span').textContent = 'Speichern';
-            });
-        });
-
-    });
-    </script>

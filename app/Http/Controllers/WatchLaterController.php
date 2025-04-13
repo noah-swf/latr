@@ -31,8 +31,6 @@ class WatchLaterController extends Controller
      */
     public function store(Request $request)
     {
-        print('Store method called');
-        Log::info('Store method called', ['request' => $request->all()]);
         $validated = $request->validate([
             'url' => ['required', 'url'],
         ]);
@@ -42,6 +40,14 @@ class WatchLaterController extends Controller
         if (!$video) {
             abort(422, 'Video could not be added to watch later list.');
         }
+
+         // HTML für das neue Video zurückgeben
+        $html = view('components.watch-later-card', compact('video'))->render();
+
+        return response()->json([
+            'success' => true,
+            'html' => $html
+        ]);
     }
 
     /**
