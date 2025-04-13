@@ -17,7 +17,10 @@ class WatchLaterService
     }
 
     /**
-     * Get or create a watch later video entry
+     * Erstelle ein neues Video oder finde ein bestehendes
+     *
+     * @param string $url
+     * @return WatchLaterVideo|null
      */
     public function getOrCreateVideo(string $url): ?WatchLaterVideo
     {
@@ -64,7 +67,11 @@ class WatchLaterService
     }
 
     /**
-     * Mark a video as watched or unwatched
+     * Markiere ein Video als "gesehen" oder "ungesehen"
+     *
+     * @param int $id
+     * @param bool $watched
+     * @return bool
      */
     public function toggleWatched(int $id, bool $watched = true): bool
     {
