@@ -6,14 +6,10 @@
             <!-- Image & mobile button -->
             <div class="flex-shrink-0 max-md:w-full relative ">
                 <div class="p-2 absolute hidden max-md:block top-0 right-0">
-                    <form
-                    id="toggle-watched-form-{{ $video->id }}"
-                    action=""
-                    method="POST"
-                    class="toggle-watched-form">
-                    @csrf
-
-                    <button type="submit" class="flex items-center bg-primary/50 hover:bg-primary text-white text-sm font-medium px-2 py-2 rounded-lg transition flex-shrink-0 z-99">
+                    <button
+                        type="button"
+                        data-id="{{ $video->id }}"
+                        class="toggle-watched-trigger flex items-center bg-primary/50 hover:bg-primary text-white text-sm font-medium px-2 py-2 rounded-lg transition flex-shrink-0 z-99 {{ $video->watched ? 'watched' : '' }}">
                         <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
                             <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
                         </svg>
@@ -32,7 +28,63 @@
                     </p>
                 </a>
             <div class="flex-shrink-0 p-3 max-md:hidden">
-                <input type="checkbox" class="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <input type="checkbox" data-id="{{ $video->id }}"  {{ $video->watched ? 'checked' : '' }} class="toggle-watched-trigger h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary hover:cursor-pointer">
             </div>
         </div>
     </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.toggle-watched-trigger').forEach(el => {
+        // Deckt sowohl die Checkbox als auch den Button ab
+        el.addEventListener(el.tagName === 'INPUT' ? 'change' : 'click', () => {
+            const videoId = el.getAttribute('data-id');
+            const videoList = document.getElementById('video-list');
+
+            const isCheckbox = el.tagName === 'INPUT';
+            const isWatched = isCheckbox
+                ? el.checked
+                : el.classList.contains('watched');
+
+            const body = isWatched ? {
+                video_id: videoId
+            } : {
+                unwatched: true,
+                video_id: videoId
+            };
+
+            // Findet die WatchLaterCard (ausgehend vom Button/Checkbox) anhand der Klassen
+            const videoCard = el.closest('.mx-auto.bg-white.rounded-lg');
+
+            fetch(`/watch-later/toggle-watched/${videoId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                },
+                body: JSON.stringify(body)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data && data.success) {
+                    // Ausblenden der Karte mit Animation
+                    videoCard.style.transition = 'opacity 0.3s, transform 0.3s';
+                    videoCard.style.opacity = '0';
+                    videoCard.style.transform = 'translateX(-20px)';
+
+                    // Nach der Animation das Element entfernen
+                    setTimeout(() => {
+                        videoCard.remove();
+                    }, 300);
+                } else {
+                    console.log("Fehler beim Togglen");
+                }
+            })
+            .catch(error => {
+                console.error('Fehler beim Togglen:', error);
+            });
+        });
+    });
+    });
+</script>

@@ -10,6 +10,10 @@
             @endforeach
         </div>
 
+        <div class="mt-5">
+            {{ $videos->links() }}
+        </div>
+
 
     </div>
 </x-app-layout>
@@ -60,4 +64,6 @@
         });
 
     });
+
+
     </script>

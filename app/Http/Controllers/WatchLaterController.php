@@ -53,8 +53,28 @@ class WatchLaterController extends Controller
     /**
      * Toggle watched status
      */
-    public function toggleWatched(Request $request, $id): bool
+    public function toggleWatched(Request $request, $id)
     {
-        return $this->watchLaterService->toggleWatched($id, !$request->has('unwatched'));
+        $result = $this->watchLaterService->toggleWatched($id, !$request->has('unwatched'));
+
+        // Das Video nach dem Toggle neu laden für den HTML-Response
+        $video = WatchLaterVideo::find($id);
+
+        return response()->json([
+            'success' => $result,
+            'html' => $result ? view('components.watch-later-card', compact('video'))->render() : ''
+        ]);
+    }
+
+    public function watched()
+    {
+        $videos = WatchLaterVideo::watched()->orderBy('created_at', 'desc')->get();
+        return view('home', compact('videos'));
+    }
+
+    public function unwatched()
+    {
+        $videos = WatchLaterVideo::unwatched()->orderBy('created_at', 'desc')->get();
+        return view('home', compact('videos'));
     }
 }

@@ -23,4 +23,14 @@ class WatchLaterVideo extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function scopeUnwatched($query)
+    {
+        return $query->where('watched', false);
+    }
+
+    public function scopeWatched($query)
+    {
+        return $query->where('watched', true);
+    }
 }

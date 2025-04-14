@@ -12,17 +12,20 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+
 Route::get('/home', function () {
-    $videos = WatchLaterVideo::with('user')->latest()->simplePaginate(10);
+    $videos = WatchLaterVideo::with(['user'])->unwatched()->latest()->simplePaginate(3);
     return view('home', compact('videos'));
 })->middleware(['auth', 'verified'])->name('home');
 
-Route::post('/watch-later/store', [WatchLaterController::class, 'store'])->middleware(['auth', 'verified']);
 
+Route::post('/watch-later/store', [WatchLaterController::class, 'store'])->middleware(['auth', 'verified']);
+Route::post('/watch-later/toggle-watched/{id}', [WatchLaterController::class, 'toggleWatched'])->name('watch-later.toggle-watched');
 
 
 Route::get('/watched', function () {
-    return view('watched');
+    $videos = WatchLaterVideo::with(['user'])->watched()->latest()->simplePaginate(50);
+    return view('watched', compact('videos'));
 })->middleware(['auth', 'verified'])->name('watched');
 
 Route::middleware('auth')->group(function () {

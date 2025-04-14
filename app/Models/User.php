@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function watchLaterVideos()
+    {
+        return $this->hasMany(WatchLaterVideo::class)->where('watched', false)->orderBy('created_at', 'desc')->get();
+    }
 }
