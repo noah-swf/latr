@@ -10,7 +10,7 @@
             @endforeach
         </div>
 
-        <div class="mt-5">
+        <div class="mt-5 right-0">
             {{ $videos->links() }}
         </div>
 
