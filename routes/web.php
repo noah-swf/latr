@@ -20,7 +20,8 @@ Route::get('/home', function () {
 
 
 Route::post('/watch-later/store', [WatchLaterController::class, 'store'])->middleware(['auth', 'verified']);
-Route::post('/watch-later/toggle-watched/{id}', [WatchLaterController::class, 'toggleWatched'])->name('watch-later.toggle-watched');
+Route::post('/watch-later/toggle-watched/{id}', [WatchLaterController::class, 'toggleWatched'])->middleware(['auth', 'verified'])->name('watch-later.toggle-watched');
+Route::delete('/watch-later/{id}', [WatchLaterController::class, 'destroy'])->middleware(['auth', 'verified'])->name('watch-later.destroy');
 
 
 Route::get('/watched', function () {

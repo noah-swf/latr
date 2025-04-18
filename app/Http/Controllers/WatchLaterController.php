@@ -50,6 +50,18 @@ class WatchLaterController extends Controller
         ]);
     }
 
+    public function destroy(Request $request)
+    {
+        $video = WatchLaterVideo::find($request->id);
+
+        if ($video) {
+            $video->delete();
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false], 404);
+    }
+
     /**
      * Toggle watched status
      */
