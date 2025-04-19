@@ -67,7 +67,7 @@ class WatchLaterController extends Controller
      */
     public function toggleWatched(Request $request, $id)
     {
-        $result = $this->watchLaterService->toggleWatched($id, !$request->has('unwatched'));
+        $result = $this->watchLaterService->toggleWatched($id);
 
         // Das Video nach dem Toggle neu laden für den HTML-Response
         $video = WatchLaterVideo::find($id);

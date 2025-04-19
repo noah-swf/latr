@@ -73,12 +73,12 @@ class WatchLaterService
      * @param bool $watched
      * @return bool
      */
-    public function toggleWatched(int $id, bool $watched = true): bool
+    public function toggleWatched(int $id): bool
     {
         $video = WatchLaterVideo::find($id);
 
         if ($video) {
-            $video->watched = $watched;
+            $video->watched = !($video->watched);
             return $video->save();
         }
 

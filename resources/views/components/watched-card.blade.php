@@ -1,6 +1,6 @@
 @props(['video'])
 
-<div class="bg-white rounded-lg shadow-md lg:p-3 p-2 text-left w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-15px)]">
+<div class="bg-white rounded-lg shadow-md lg:p-3 p-2 text-left w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-15px)] watched">
     <div class="flex items-center flex-col">
         <!-- Image & mobile button -->
         <div class="flex-shrink-0 w-full relative">
@@ -44,7 +44,7 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    /* document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.toggle-watched-trigger').forEach(el => {
         // Deckt sowohl die Checkbox als auch den Button ab
         el.addEventListener('click', () => {
@@ -127,5 +127,5 @@
                 });
             });
         });
-    });
+    }); */
 </script>
