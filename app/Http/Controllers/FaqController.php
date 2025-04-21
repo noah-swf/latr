@@ -20,6 +20,11 @@ class FaqController extends Controller
                 'open' => false
             ],
             [
+                'question' => 'Welche Plattformen werden derzeit unterstützt?',
+                'answer' => 'Derzeit unterstützen wir nur YouTube. Weitere Plattformen werden aber in Zukunft hinzugefügt!',
+                'open' => false
+            ],
+            [
                 'question' => 'Was steckt hinter latr? Kann ich den Code sehen?',
                 'answer' => 'Latr wurde mit Laravel und Tailwind entwickelt. Der Code ist öffentlich zugänglich, indem du unten auf den Link "Github" klickst.',
                 'open' => false
