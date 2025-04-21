@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WatchLaterController;
+use App\Http\Controllers\FaqController;
 
 use App\Models\WatchLaterVideo;
 
@@ -28,6 +29,10 @@ Route::get('/watched', function () {
     $videos = WatchLaterVideo::with(['user'])->watched()->latest()->simplePaginate(50);
     return view('watched', compact('videos'));
 })->middleware(['auth', 'verified'])->name('watched');
+
+
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -7,7 +7,7 @@
     <div class="flex max-md:flex-col justify-between items-center py-6">
         <span class="text-gray-600">Built with <i class="fab fa-laravel"></i> Laravel by <a href="https://github.com/noah-swf" class="text-primary-600 font-semibold hover:underline underline-offset-4 ease-in-out duration-150">Noah</a>.</span>
         <div class="flex max-md:flex-col items-center py-4">
-            <x-footer-link href="">FAQ</x-footer-link>
+            <x-footer-link href="{{ route('faq') }}">FAQ</x-footer-link>
             <x-footer-link href="">GitHub</x-footer-link>
             <x-footer-link href="">Datenschutz</x-footer-link>
             <x-footer-link href="">Impressum</x-footer-link>
