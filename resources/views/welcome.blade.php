@@ -57,10 +57,10 @@
                 <!-- Content -->
                 <div
                   class="flex flex-col items-center justify-center -mt-10
-                         lg:flex-row lg:justify-between
+                         md:flex-row md:justify-between
                          h-full relative z-10"
                 >
-                  <div class="w-full lg:w-1/2 px-4 lg:px-0">  <!-- auf Mobile volle Breite mit Padding -->
+                  <div class="w-full lg:w-1/2 md:w-4/5 px-4 lg:px-0">  <!-- auf Mobile volle Breite mit Padding -->
                     <h1 class="font-lora italic text-4xl md:text-5xl leading-tight mb-6">
                       Behalte deine Watchlist im Griff – immer und überall.
                     </h1>
