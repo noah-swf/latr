@@ -9,8 +9,7 @@
         <div class="flex max-md:flex-col items-center py-4">
             <x-footer-link href="{{ route('faq') }}">FAQ</x-footer-link>
             <x-footer-link href="">GitHub</x-footer-link>
-            <x-footer-link href="">Datenschutz</x-footer-link>
-            <x-footer-link href="">Impressum</x-footer-link>
+            <x-footer-link href="{{ route('datenschutz') }}">Datenschutz</x-footer-link>
         </div>
         <span class="text-gray-600">© {{ now()->year }} latr.</span>
     </div>

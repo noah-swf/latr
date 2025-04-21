@@ -26,12 +26,16 @@ Route::delete('/watch-later/{id}', [WatchLaterController::class, 'destroy'])->mi
 
 
 Route::get('/watched', function () {
-    $videos = WatchLaterVideo::with(['user'])->watched()->latest()->simplePaginate(50);
+    $videos = WatchLaterVideo::with(['user'])->watched()->latest()->simplePaginate(25);
     return view('watched', compact('videos'));
 })->middleware(['auth', 'verified'])->name('watched');
 
 
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+Route::get('/datenschutz', function () {
+    return view('datenschutz');
+})->name('datenschutz');
+
 
 
 Route::middleware('auth')->group(function () {
