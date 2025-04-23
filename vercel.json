@@ -9,6 +9,8 @@
       { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "env": {
-        "VIEW_COMPILED_PATH": "/tmp/framework/views"
+        "VIEW_COMPILED_PATH": "/tmp/framework/views",
+        "STORAGE_PATH": "/tmp/storage",
+        "LOG_CHANNEL": "errorlog"
     }
   }
