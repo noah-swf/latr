@@ -4,7 +4,7 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "vercel-build": "echo 'Installing OpenSSL 1.0...' && yum install -y openssl10-libs && echo 'Running Composer...' && composer install --optimize-autoloader --no-dev && echo 'Running Laravel Optimizations...' && php artisan config:cache && php artisan route:cache && php artisan view:cache && echo 'Build finished.'"
+        "vercel-build": "echo 'Installing OpenSSL 1.0...' && yum install -y openssl10 && echo 'Running Composer...' && composer install --optimize-autoloader --no-dev && echo 'Running Laravel Optimizations...' && php artisan config:cache && php artisan route:cache && php artisan view:cache && echo 'Build finished.'"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
