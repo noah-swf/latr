@@ -30,3 +30,5 @@ yarn-error.log
 bootstrap/cache/*.php
 
 .vercel
+
+.vercel
