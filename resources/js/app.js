@@ -11,3 +11,7 @@ Alpine.start();
 document.addEventListener('DOMContentLoaded', () => {
     WatchLater.init();
 });
+
+import.meta.glob([
+    '../images/**'
+  ]);
