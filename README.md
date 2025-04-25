@@ -95,5 +95,5 @@ While building Latr I deepened my understanding of:
 - Applying **SOLID** principles in PHP
 
 ## License
-Distributed under the **MIT License**. See `LICENSE` for more information.
+Distributed under the **MIT License**. 
 
