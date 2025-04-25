@@ -20,8 +20,8 @@ class WatchLaterController extends Controller
     /**
      * Display a listing of watch later videos, sorted by creation date (desc).
      */
-    public function index(){
-        $videos = WatchLaterVideo::orderBy('created_at', 'desc')->get();
+    public function index(Request $request){
+        $videos = $request->user()->watchLaterVideos()->latest()->get();
 
         return view('watch-later.index', compact('videos'));
     }
@@ -52,14 +52,10 @@ class WatchLaterController extends Controller
 
     public function destroy(Request $request)
     {
-        $video = WatchLaterVideo::find($request->id);
+        $video = $request->user()->watchedVideos()->findOrFail($request->id);
+        $video->delete();
 
-        if ($video) {
-            $video->delete();
-            return response()->json(['success' => true]);
-        }
-
-        return response()->json(['success' => false], 404);
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -67,11 +63,9 @@ class WatchLaterController extends Controller
      */
     public function toggleWatched(Request $request, $id)
     {
-        $result = $this->watchLaterService->toggleWatched($id);
-
+        $result = $this->watchLaterService->toggleWatched($request, $id);
         // Das Video nach dem Toggle neu laden für den HTML-Response
         $video = WatchLaterVideo::find($id);
-
         return response()->json([
             'success' => $result,
             'html' => $result ? view('components.watch-later-card', compact('video'))->render() : ''
@@ -80,7 +74,7 @@ class WatchLaterController extends Controller
 
     public function watched()
     {
-        $videos = WatchLaterVideo::watched()->orderBy('created_at', 'desc')->get();
+        $videos = WatchLaterVideo::watched()->where()->orderBy('created_at', 'desc')->get();
         return view('home', compact('videos'));
     }
 

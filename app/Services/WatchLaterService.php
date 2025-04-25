@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use App\Models\WatchLaterVideo;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -70,18 +71,18 @@ class WatchLaterService
      * Markiere ein Video als "gesehen" oder "ungesehen"
      *
      * @param int $id
-     * @param bool $watched
      * @return bool
      */
-    public function toggleWatched(int $id): bool
+    public function toggleWatched(Request $request, int $id): bool
     {
-        $video = WatchLaterVideo::find($id);
-
-        if ($video) {
-            $video->watched = !($video->watched);
-            return $video->save();
+        // $video = $request->user()->watchLaterVideos()->findOrFail($id);
+        $video = WatchLaterVideo::where('id', $id)->where('user_id', Auth::id())->first();
+        if (!$video) {
+            Log::error("Video with ID {$id} not found for user ID " . Auth::id());
+            return false;
         }
-
-        return false;
+        Log::debug("message");
+        $video->watched = !($video->watched);
+        return $video->save();
     }
 }

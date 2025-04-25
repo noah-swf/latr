@@ -48,6 +48,11 @@ class User extends Authenticatable
 
     public function watchLaterVideos()
     {
-        return $this->hasMany(WatchLaterVideo::class)->where('watched', false)->orderBy('created_at', 'desc')->get();
+        return $this->hasMany(WatchLaterVideo::class)->where('watched', false)->orderBy('created_at', 'desc');
+    }
+
+    public function watchedVideos()
+    {
+        return $this->hasMany(WatchLaterVideo::class)->where('watched', true)->orderBy('created_at', 'desc');
     }
 }

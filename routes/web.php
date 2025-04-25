@@ -6,6 +6,8 @@ use App\Http\Controllers\FaqController;
 
 use App\Models\WatchLaterVideo;
 
+use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,8 +16,9 @@ Route::get('/', function () {
 })->name('welcome');
 
 
-Route::get('/home', function () {
-    $videos = WatchLaterVideo::with(['user'])->unwatched()->latest()->simplePaginate(3);
+Route::get('/home', function (Request $request) {
+    $videos = $request->user()->watchLaterVideos()->unwatched()->latest()->simplePaginate(3);
+
     return view('home', compact('videos'));
 })->middleware(['auth', 'verified'])->name('home');
 
@@ -25,8 +28,8 @@ Route::post('/watch-later/toggle-watched/{id}', [WatchLaterController::class, 't
 Route::delete('/watch-later/{id}', [WatchLaterController::class, 'destroy'])->middleware(['auth', 'verified'])->name('watch-later.destroy');
 
 
-Route::get('/watched', function () {
-    $videos = WatchLaterVideo::with(['user'])->watched()->latest()->simplePaginate(25);
+Route::get('/watched', function (Request $request) {
+    $videos = $request->user()->watchedVideos()->latest()->simplePaginate(25);
     return view('watched', compact('videos'));
 })->middleware(['auth', 'verified'])->name('watched');
 
