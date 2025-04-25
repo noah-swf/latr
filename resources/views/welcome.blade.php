@@ -47,7 +47,7 @@
                 <!-- Mockup -->
                 <div class="absolute bottom-0 right-0 pointer-events-none">
                   <img
-                    src="{{ Vite::asset('/images/device-mockup.png') }}"
+                    src="{{ Vite::asset('resources/images/device-mockup.png') }}"
                     alt="latr app mockup"
                     class="lg:w-auto max-w-full"
                     onerror="this.src='https://placehold.co/600x400?text=latr+App+Mockup'"
