@@ -80,13 +80,8 @@ The app will be available at <http://latr.test>.
 
 
 ## Demo
-<video src="docs/demo.mp4"
-       width="640"
-       loop
-       muted
-       controls>
-Ihr Browser unterstützt das Video-Tag nicht.
-</video>
+
+https://github.com/user-attachments/assets/0fa57d89-4c51-4d4d-9e8f-46e6fe2f20d4
 
 
 ## Roadmap
